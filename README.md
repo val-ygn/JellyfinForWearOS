@@ -27,3 +27,49 @@ Evening: You pick up your audiobook where you left off. With a simple gesture on
 
 ### 1.4 Why is this app necessary?
 Currently, there are very few high-quality options for accessing a Jellyfin server on WearOS. This project fills a technological gap by offering a modern, dark interface (to save battery on OLED screens) that is intuitive, respects Jellyfin’s visual identity, and is fully optimized for small circular displays.
+
+## PART 2: Detailed Information (Technical)
+This section details the technological choices and the internal architecture for the development.
+
+### 2.1 Software Architecture and Environment
+Development is based on the latest standards of the Android Wearable ecosystem:
+
+Operating System: Minimum WearOS 3.0 (API 30+).
+
+Language: Kotlin, chosen for its safety and conciseness.
+
+Graphical Interface: Jetpack Compose for Wear OS. This framework allows for the creation of reactive interfaces that adapt perfectly to round screens thanks to components like ScalingLazyColumn.
+
+Audio Management: The implementation of Media3 with ExoPlayer ensures compatibility with numerous formats (MP3, FLAC, OGG, OPUS) and smooth handling of adaptive streaming.
+
+### 2.2 Configuration and Pairing System (Onboarding)
+The major challenge is authentication. We use two methods:
+
+Proximity Communication: The Wearable Data Layer API allows for message exchange between the phone and the watch. The phone, already connected to the Jellyfin server, securely transmits the server address and the Access Token.
+
+Token System (Fallback): If the Bluetooth link fails, the watch generates a unique 6-digit code. The user enters this code into the smartphone app to validate pairing via Jellyfin’s discovery services.
+
+### 2.3 Advanced Media and Storage Management
+Data Persistence: A local Room database stores metadata for downloaded files (titles, artists, file paths, playback progress).
+
+Caching Strategy: For streaming, a circular cache is used to preload the next few minutes of audio, preventing micro-stutters during transitions between Wi-Fi or 4G antennas.
+
+Storage Optimization: Users can set a storage limit (e.g., 2 GB). The app offers "smart cleaning," prioritizing the deletion of files already listened to (especially for audiobooks).
+
+### 2.4 Navigation and System Integration
+The interface is structured in several layers for optimal execution speed:
+
+Hierarchical Navigation: Home > Library > Artist > Album > Player.
+
+Touch Interaction: Use of swipe gestures to toggle between the tracklist and the playback control menu.
+
+Hardware Support: Integration of the Rotary Input (rotating crown) for smooth scrolling and precise volume control.
+
+Tiles: Developed with the Tiles API, these allow users to launch actions without opening the full app, reducing CPU consumption.
+
+### 2.5 Development Challenges to Address
+Power Saving: Limiting CPU wakeups during downloads. Using WorkManager to schedule heavy tasks while the device is charging.
+
+Bluetooth Management: Ensuring stable and automatic reconnection of headphones without interrupting playback. Managing audio priorities to avoid saturating Bluetooth bandwidth.
+
+Synchronization: Updating playback progress on the Jellyfin server as soon as the watch regains an internet connection, while handling version conflicts if the media was played on another device in the meantime.
