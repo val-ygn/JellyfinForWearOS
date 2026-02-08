@@ -1,4 +1,4 @@
-# JellyfinForWearOS
+# JellyfinForWearOS ** (In Development, it may change) **
 Please note that this description is in 2 Parts.
 
 ## PART 1: Key Information (General Public)
