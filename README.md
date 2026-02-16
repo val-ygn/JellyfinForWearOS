@@ -2,6 +2,7 @@
 **(In Development, it may change)**
 
 Please note that this description is in 2 Parts.
+The app is not yet ready to be launched. I am actually working on it.
 
 ## PART 1: Key Information (General Public)
 This section is designed to present the project in a clear and accessible way for everyone.
