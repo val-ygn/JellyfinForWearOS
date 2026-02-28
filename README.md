@@ -1,6 +1,6 @@
 # JellyfinForWearOS 
 **(In Development, it may change)**
-**Informations can be changed on the Website, so check it out (pinned on the sidebar)**
+**Informations can be changed on the Website (currently in French), so check it out (pinned on the sidebar)**
 
 Please note that this description is in 2 Parts.
 The app is not yet ready to be launched. I am actually working on it.
